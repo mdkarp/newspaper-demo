@@ -86,4 +86,10 @@ def dump_article():
          'keywords': str(', '.join(article.keywords)),
          'summary': article.summary
          }
-    return json.dumps(a)
+    resp = app.make_response(json.dumps(a))
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    resp.headers['Access-Control-Expose-Headers'] = 'Access-Control-Allow-Origin'
+    resp.headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept'
+    resp.headers['Content-type'] = 'application/json'
+
+    return resp
